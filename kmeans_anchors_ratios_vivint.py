@@ -248,6 +248,8 @@ def get_bboxes_adapted_to_input_size(instances, input_size):
     #    ann["id"]: input_size / max(ann["width"], ann["height"])
     #    for ann in instances["images"]
     #}
+    
+    # Vivint data has normalized bbox, hence we don't require to divide it by dimensions
     scale_factors = input_size
     #return np.array(
     #    [
@@ -255,6 +257,8 @@ def get_bboxes_adapted_to_input_size(instances, input_size):
     #        for ann in instances["annotations"]
     #    ]
     #)
+    
+    # scale_factors is not an array in our case
     return np.array(
         [
             np.array(ann["bbox"][-2:]) * scale_factors
